@@ -17,7 +17,11 @@
         <v-toolbar color="primary" title="Add Bookmark"></v-toolbar>
         <!--  <v-card-text>  -->
         <v-form>
-          <v-text-field label="Title" v-model="title" :rules="[v => !!v || 'Title is required']"></v-text-field>
+          <v-text-field
+            label="Title"
+            v-model="title"
+            :rules="[(v) => !!v || 'Title is required']"
+          ></v-text-field>
           <v-textarea
             label="Description"
             rows="2"
@@ -42,9 +46,14 @@
               </v-list-item>
             </template>
           </v-combobox>
-          <v-text-field label="Link" v-model="link" type="url" :rules="[v => !!v|| 'Link is required']"></v-text-field>
+          <v-text-field
+            label="Link"
+            v-model="link"
+            type="url"
+            :rules="[(v) => !!v || 'Link is required']"
+          ></v-text-field>
         </v-form>
-       <!--  </v-card-text>  --> 
+        <!--  </v-card-text>  -->
         <v-card-actions>
           <div>
             <v-btn color="success" width="250" @click.prevent="addBookmark()"
@@ -78,18 +87,15 @@ export default {
 
     // addbutton function
     function addBookmark() {
-
-      if(title.value == "")
-      {
+      if (title.value == "") {
         alert("Please enter valid title");
-        return ;
+        return;
       }
-     if(link.value == "")
-      {
+      if (link.value == "") {
         alert("Please enter valid link");
-        return ;
+        return;
       }
-  
+
       const f = setupFirebase();
       const name = collection(f, "name");
       const userdoc = doc(name, uname.value);
@@ -120,6 +126,7 @@ export default {
         title: title.value,
         description: desc.value,
         link: link.value,
+        group: search.value,
       })
         .then(() => {
           title.value = "";

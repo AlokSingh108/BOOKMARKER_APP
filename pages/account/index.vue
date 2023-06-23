@@ -53,51 +53,48 @@ export default {
     onSnapshot(group, (snapshot) => {
       snapshot.docs.forEach((doc) => {
         const Title = { ...doc.data() };
-        if (items.find((gname) => gname === Title.title) == undefined) {
-          items.push(Title.title);
+        let count = 0;
+        items.forEach((book) => {
+          if (book.title === Title.title) {
+            count += 1;
+          }
+        });
+        if (count == 0) {
+          items.push({
+            ...doc.data(),
+          });
         }
       });
     });
 
     
     // all bookmark array
-    onSnapshot(d, (s) => {
-      getDocs(group).then((snap) => {
-        snap.docs.forEach((docu) => {
-          const Title = { ...docu.data() };
-          const g = collection(d, Title.title);
-          getDocs(g)
-            .then((snapshot) => {
-              snapshot.docs.forEach((doc) => {
-                let count = 0;
-                ABM.forEach((book) => {
-                  if (book.id === doc.id) {
-                    count += 1;
-                  }
-                });
-                if (count == 0) {
-                  ABM.push({
-                    ...doc.data(),
-                    id: doc.id,
-                    group: Title.title,
-                    showDesc: false,
-                  });
-                }
-              });
-            })
-            .catch(() => {
-              console.log("error in storing data");
-            });
+    onSnapshot(allBM, (snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        let count = 0;
+        ABM.forEach((book) => {
+          if (book.id === doc.id) {
+            count += 1;
+          }
         });
+        if (count == 0) {
+          ABM.push({
+            ...doc.data(),
+            id: doc.id,
+            showDesc: false,
+            show:true,
+          });
+        }
       });
     });
+
     provide("ABM", ABM);
 
     // deleting bookmark
-    function deletecard(id, group) {
+    function deletecard(id) {
       console.log(id);
       // const docref = doc(firestore, "name/" + uname.value +"/bookmarks", id);
-      const col = collection(d, group);
+      const col = collection(d, "bookmarks");
 
       const docref = doc(col, id);
 
