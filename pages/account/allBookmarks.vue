@@ -55,7 +55,7 @@
             <v-card-subtitle> group: {{ bookmark.group }} </v-card-subtitle>
 
             <v-card-actions>
-              <a :href="bookmark.link">
+              <a target="_blank" :href=addlink(bookmark.link) >
                 <v-btn color="green-accent-4" variant="text"> Link </v-btn>
               </a>
 
@@ -130,6 +130,7 @@ export default {
     return {
       searchBar: "",
       model: ["All"],
+      str : "https://",
     };
   },
 
@@ -151,6 +152,14 @@ export default {
       return this.ABM.slice().sort(function (a, b) {
         return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
       });
+    },
+
+       addlink(link){
+      
+      if(link.includes(this.str))
+        link = link.substr(8)
+
+      return `https://${link}`;
     },
 
     filteredList(book) {
