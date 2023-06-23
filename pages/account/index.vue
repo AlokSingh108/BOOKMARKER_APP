@@ -69,26 +69,24 @@ export default {
 
     
     // all bookmark array
-    onSnapshot(allBM, (snapshot) => {
+    const b = collection(d, "bookmarks");
+
+    onSnapshot(b, (snapshot) => {
       snapshot.docs.forEach((doc) => {
-        let count = 0;
+        let count=0;
         ABM.forEach((book) => {
-          if (book.id === doc.id) {
-            count += 1;
+          if(book.id===doc.id){
+            count+=1;
           }
         });
-        if (count == 0) {
-          ABM.push({
-            ...doc.data(),
-            id: doc.id,
-            showDesc: false,
-            show:true,
-          });
+        if(count==0){
+          ABM.push({ ...doc.data(), id: doc.id,show:true, showDesc: false });
         }
       });
     });
 
     provide("ABM", ABM);
+    provide("items", items);
 
     // deleting bookmark
     function deletecard(id) {

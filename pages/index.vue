@@ -191,6 +191,9 @@ export default {
       newaccount,
       showloginpage,
       showsignuppage,
+      wrongEmail,
+      wrongPass,
+      wrongUser
     };
   },
   data() {

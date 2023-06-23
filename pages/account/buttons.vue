@@ -121,7 +121,7 @@ export default {
         }
       });
 
-      const grcol = collection(userdoc, search.value);
+      const grcol = collection(userdoc, "bookmarks");
       addDoc(grcol, {
         title: title.value,
         description: desc.value,
