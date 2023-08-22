@@ -1,4 +1,5 @@
 <template>
+  <VitePwaManifest />
   <v-app>
     <toolbar
       @showAllBookmarks="all = true"

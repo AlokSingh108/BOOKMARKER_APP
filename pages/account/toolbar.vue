@@ -1,4 +1,5 @@
 <template>
+  <VitePwaManifest />
   <nav>
     <v-toolbar color="cyan-darken-3" >
       <v-icon

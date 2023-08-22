@@ -1,4 +1,5 @@
 <template>
+  <VitePwaManifest />
   <v-app>
     <toolBar v-if="!show" @showlogin="showloginpage = true, showsignuppage = false" @showsignup="showloginpage = false, showsignuppage = true"/>
 

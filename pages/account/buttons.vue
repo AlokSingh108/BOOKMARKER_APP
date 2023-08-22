@@ -1,5 +1,6 @@
 <template>
   <div>
+    <VitePwaManifest />
     <v-sheet class="d-flex middle">
       <v-btn
         append-icon="mdi-plus"
