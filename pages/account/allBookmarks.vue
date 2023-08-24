@@ -1,6 +1,6 @@
 <template>
 <!-- <div> -->
-
+    <VitePwaManifest />
 <form action="">
     <v-sheet class="d-flex justify-sm-space-around flex-wrap mt-5" justify="center">
         <div>
